@@ -1,0 +1,90 @@
+.card.card-frame {
+  box-shadow: none;
+  border: 1px solid var(--bs-border-color);
+}
+
+.new-card-v2 {
+  transition: all 0.3s ease-in-out;
+  border-radius: .75rem;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 25px -5px rgba(0,0,0,.1), 0 10px 10px -5px rgba(0,0,0,.04);
+  }
+
+  .card-header {
+    background-position: 50%;
+    background-size: cover;
+    padding: 1.5rem;
+    border-radius: .75rem;
+    position: relative;
+
+    .card-title, .card-category, .material-icons {
+      color: #fff;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    }
+  }
+
+  .card-body {
+    padding: 1.5rem;
+
+    .card-description {
+      margin-bottom: 1.5rem;
+    }
+
+    .author {
+      .name span {
+        display: block;
+        font-size: .75rem;
+      }
+    }
+  }
+
+  .card-footer .stats {
+    i {
+      margin-right: 0.25rem;
+      position: relative;
+      top: 3px;
+    }
+  }
+}
+
+// Asignar el fondo degradado solo a las tarjetas de índice
+.page-index-card {
+  .card-header {
+    background-image: linear-gradient(195deg, #49a3f1, #1A73E8);
+  }
+}
+
+.dark-mode .page-index-card {
+  .card-header {
+    background-image: linear-gradient(195deg, #42424a, #191919) !important;
+    border: 2px solid #6c757d !important; // Borde más grueso y de color diferente
+  }
+}
+
+// Colores de botones en modo oscuro
+.dark-mode .new-card-v2 .card-footer {
+  .btn-link.btn-info .material-icons {
+    color: #17a2b8 !important;
+  }
+  .btn-link.btn-warning .material-icons {
+    color: #ffc107 !important;
+  }
+  .btn-link.btn-danger .material-icons {
+    color: #dc3545 !important;
+  }
+}
+
+.dark-mode .modal-content {
+    background-color: #34495e !important;
+}
+
+.dark-mode .modal-header .modal-title {
+    color: #fff;
+}
+
+.dark-mode .btn-close {
+    color: #fff !important;
+    text-shadow: none;
+}

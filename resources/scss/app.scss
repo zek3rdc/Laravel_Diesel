@@ -1,0 +1,35 @@
+// Importa los estilos de Material Dashboard
+@use "../../material-dashboard-master/assets/scss/material-dashboard.scss" as material;
+
+// Importa Animate.css
+@import 'animate.css';
+
+// Aquí puedes añadir tus animaciones y estilos personalizados
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    transition: all 0.3s ease-in-out;
+}
+
+.stat-card:hover .stat-icon i {
+    animation: pulse-hover 1s infinite;
+}
+
+// Forzar la fuente de Material Icons para asegurar el renderizado
+.material-icons {
+    font-family: 'Material Icons Round' !important;
+}
+
+@keyframes pulse-hover {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@import 'components/cards';

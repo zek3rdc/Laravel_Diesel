@@ -1,0 +1,39 @@
+/*
+  Aislamiento del contexto de apilamiento para el sidebar.
+  Esto debería prevenir que las animaciones de los hijos
+  afecten el z-index del sidebar.
+*/
+.sidenav {
+  transform-style: preserve-3d;
+}
+
+/*
+  Indicamos al navegador que se prepare para animar la propiedad 'transform'
+  en los íconos, lo que puede mejorar el rendimiento y evitar glitches.
+*/
+.nav-link i {
+  will-change: transform;
+  transition: transform 0.3s ease;
+}
+
+/*
+  La animación se activa cuando el usuario hace hover sobre el enlace (.nav-link).
+  La animación se aplica directamente al ícono (i) hijo.
+  Esto evita el uso de JavaScript para añadir y quitar clases.
+*/
+.nav-link:hover i {
+  animation-name: bounce-on-hover;
+  animation-duration: 0.5s;
+}
+
+@keyframes bounce-on-hover {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.25);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
