@@ -44,22 +44,24 @@ Route::middleware([
 
 
     // Rutas para Inventario (Productos)
-    Route::get('/inventario/reponer-stock', [InventarioController::class, 'showReponerStock'])->name('inventario.reponerStock')->middleware('can:ver productos');
+    // Rutas específicas deben ir antes del Route::resource
+    Route::get('/inventario/gestion-stock', [InventarioController::class, 'showReponerStock'])->name('inventario.reponerStock')->middleware('can:ver productos');
     Route::post('/inventario/enviar-notificaciones', [InventarioController::class, 'enviarNotificaciones'])->name('inventario.enviarNotificaciones')->middleware('can:anadir productos');
     Route::get('/inventario/ordenes-pendientes', [InventarioController::class, 'showOrdenesPendientes'])->name('inventario.ordenesPendientes')->middleware('can:ver productos');
     Route::post('/inventario/reenviar-notificacion/{ordenCompra}', [InventarioController::class, 'reenviarNotificacion'])->name('inventario.reenviarNotificacion')->middleware('can:anadir productos');
     Route::get('/inventario/ordenes-pendientes/{ordenCompra}/detalles', [InventarioController::class, 'getOrdenDetalles'])->name('inventario.getOrdenDetalles')->middleware('can:ver productos');
     Route::post('/inventario/confirmar-recepcion/{ordenCompra}', [InventarioController::class, 'confirmarRecepcion'])->name('inventario.confirmarRecepcion')->middleware('can:anadir productos');
+    Route::get('/inventario/create', [InventarioController::class, 'create'])->name('inventario.create')->middleware('can:anadir productos');
+    Route::get('/inventario/{producto}/editar', [InventarioController::class, 'edit'])->name('inventario.custom_edit')->middleware('can:modificar productos');
+
+    // Route::resource debe ir después de las rutas específicas para evitar conflictos
     Route::resource('inventario', InventarioController::class)->parameters([
         'inventario' => 'producto'
-    ])->except(['edit'])->middleware([
+    ])->except(['edit', 'create'])->middleware([
         'can:ver productos'
     ]);
-    Route::get('/inventario/{producto}/editar', [InventarioController::class, 'edit'])->name('inventario.custom_edit')->middleware('can:modificar productos');
-    Route::post('/inventario', [InventarioController::class, 'store'])->name('inventario.store')->middleware('can:anadir productos');
-    Route::put('/inventario/{producto}', [InventarioController::class, 'update'])->name('inventario.update')->middleware('can:modificar productos');
-    Route::delete('/inventario/{producto}', [InventarioController::class, 'destroy'])->name('inventario.destroy')->middleware('can:eliminar productos');
-    Route::get('/inventario/create', [InventarioController::class, 'create'])->name('inventario.create')->middleware('can:anadir productos');
+    // Las rutas 'store', 'update', 'destroy' y 'show' del resource se mantienen
+    // ya que no tienen conflicto con las rutas específicas definidas arriba.
 
 
     // Rutas para Categorías

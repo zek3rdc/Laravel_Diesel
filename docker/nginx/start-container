@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+if [ -z "$WWWUSER" ]; then
+    WWWUSER=sail
+fi
+
+if [ ! -d /var/run/php ]; then
+    mkdir -p /var/run/php
+fi
+
+chown -R $WWWUSER:www-data /var/run/php
+
+if [ "$WWWUSER" != "sail" ]; then
+    sed -i "s/user = sail/user = $WWWUSER/g" /etc/php/8.3/fpm/pool.d/www.conf
+    sed -i "s/group = sail/group = www-data/g" /etc/php/8.3/fpm/pool.d/www.conf
+fi
+
+if [ ! -z "$SKIP_CHOWN" ]; then
+    chown -R $WWWUSER:www-data /var/www/html
+fi
+
+exec /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf

@@ -15,12 +15,14 @@ fi
 
 chmod -R ugo+rw /.composer
 
+if [ ! -d /var/run/php ]; then
+    mkdir -p /var/run/php
+fi
+
+chown -R sail:www-data /var/run/php
+
 if [ $# -gt 0 ]; then
-    if [ "$SUPERVISOR_PHP_USER" = "root" ]; then
-        exec "$@"
-    else
-        exec gosu $WWWUSER "$@"
-    fi
+    exec gosu $WWWUSER "$@"
 else
     exec /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf
 fi

@@ -84,7 +84,7 @@
             </a>
         </div>
         <div class="col-lg-3 col-md-6 col-sm-6 mb-4">
-            <a href="{{ route('inventario.reponerStock') }}" target="_blank">
+            <a href="{{ route('inventario.index', ['filtro_kpi' => 'bajo_stock']) }}">
                 <div class="card">
                     <div class="card-header p-3 pt-2">
                     <div class="icon icon-lg icon-shape bg-gradient-warning shadow-warning text-center border-radius-xl mt-n4 position-absolute">

@@ -194,6 +194,13 @@ return [
             'can' => 'ver productos',
         ],
         [
+            'text' => 'Reponer Stock',
+            'url' => 'inventario/gestion-stock',
+            'icon' => 'add_shopping_cart',
+            'icon_class' => 'material-icons-round',
+            'can' => 'reponer stock', // Asumiendo que necesitas un permiso para esto
+        ],
+        [
             'text' => 'Categorías',
             'url' => 'categorias',
             'icon' => 'category',
